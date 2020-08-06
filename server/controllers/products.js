@@ -53,7 +53,7 @@ exports.update_product = (req, res) => {
     }).exec()
         .then(() => {
             res.status(200).json({
-                msg: 'producto editado'
+                msg: 'producto actualizado'
             })
         })
         .catch(err => res.status(500).json({errMsg: err}));
