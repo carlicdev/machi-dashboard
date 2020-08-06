@@ -5,13 +5,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
+import MachiContextProvider from './context/context';
 
 
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <MachiContextProvider>
+    <Router>
+      <App />
+    </Router>
+  </MachiContextProvider>,
   document.getElementById('root')
 );
 

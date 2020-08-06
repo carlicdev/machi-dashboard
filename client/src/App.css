@@ -8,4 +8,9 @@
   width: 200px;
   height: 100%;
   background: #4b4276;
+  z-index: 9;
+}
+
+.nodec {
+  color: rgb(235, 223, 223);
 }

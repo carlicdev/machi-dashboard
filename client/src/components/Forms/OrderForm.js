@@ -9,7 +9,7 @@ const OrderForm = () => {
 
 
     return (
-        <div className='col-md-4'>
+        <div className='container'>
             <div className='card'>
                 <div className='card-header text-center bg-dark text-light '>
                     <p className='card-title'>
