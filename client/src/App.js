@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Navigation />
-      <div className='container-fluid'>
+      <div className='container-fluid pl-0'>
         <div className='row'>
           <Sidebar />
           <Main />

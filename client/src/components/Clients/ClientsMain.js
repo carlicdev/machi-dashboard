@@ -7,7 +7,9 @@ const ClientsMain = () => {
     return (
         <div className='row'>
             <div className='col-lg-9'>
-                <h1>Hi from clients main</h1>
+                <div className='container text-center mx-auto mt-3'>
+                    <p className='display-5'>Panel de clientes</p>
+                </div>
                 <ClientList />
             </div>
             <div className='col-lg-3'>

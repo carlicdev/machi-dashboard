@@ -1,18 +1,25 @@
 const mongoose = require('mongoose');
 
 const Order = require('../models/order');
+const Product = require('../models/product');
+const Client = require('../models/client');
 
 function getTotal(order) {
-    let tempTotal = 0;
-    order.forEach(i => {
-        tempTotal = tempTotal + i.price
-    });
-    return tempTotal;
+    if (order.length < 1) {
+        let tempTotal = 0;
+        order.forEach(i => {
+            tempTotal = tempTotal + i.price
+        });
+        return tempTotal;
+    } else {
+        return null;
+    }
 }
 
 exports.get_all_orders = async (req, res) => {
-    await Order.find()
+    await Order.find().populate('client', 'name _id').populate('order', 'name price')
         .then(result => {
+            console.log(result);
             res.status(200).json(result);
         })
         .catch(err => res.status(500).json({errMsg: err}));
@@ -26,16 +33,16 @@ exports.get_order = async (req, res) => {
         .catch(err => res.status(500).json({errMsg: err}))
 };
 
-exports.new_order = (req, res) => {
-    const { client, deliveryDay, order } = req.body;
-    const { y, m, d } = deliveryDay;
-    const total = getTotal(order);
+exports.new_order = async (req, res) => {
+    const { client, year, month, day, order } = req.body;
+    const myClient = await Client.findOne({name: client}).exec();
+
     const newOrder = new Order({
         _id: new mongoose.Types.ObjectId,
-        client,
-        deliveryDay: new Date(y,m-1,d),
-        order,
-        total,
+        client: myClient,
+        deliveryDay: new Date(year,month-1,day),
+        order: order,
+        total: 100
     });
     newOrder.save()
         .then(result => {
