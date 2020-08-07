@@ -1,5 +1,16 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { FaUser, FaStickyNote } from 'react-icons/fa';
+
+const handleTotal = (ord) => {
+    let tempTotal = 0;
+    ord.forEach(i => {
+        let itemPrice = i.price;
+        tempTotal = tempTotal + itemPrice;
+    })
+    return tempTotal;
+}
+
 
 const Order = ({order}) => {
     const { deliveryDay } = order;
@@ -14,15 +25,17 @@ const Order = ({order}) => {
                 </p>
             </div>
             <div className='card-body'>
-                <p className='card-text'>{order.client.name}</p>
+                <FaUser />
+                <h6 className='card-title'>{order.client.name}</h6>
+                <FaStickyNote />
                 {
                     order.order.map(i => {
-                    return <p key={order.order.indexOf(i)} className='card-text'>{i.name}</p>
+                    return <p key={order.order.indexOf(i)}>{i.name}</p>
                     })
                 }
             </div>
             <div className='card-footer'>
-                <p className='card-text'>Total: ${order.total}</p>
+                <p className='card-text'>Total: ${handleTotal(order.order)}</p>
             </div>
         </div>
     )

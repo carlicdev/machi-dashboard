@@ -9,7 +9,6 @@ const orderSchema = new Schema({
     client: { type: String, ref: 'Client', require: true },
     deliveryDay: { type: Date, required: true },
     order: [{type: ObjectId, ref: 'Product'}],
-    total: { type: Number }
 });
 
 module.exports = model('Order', orderSchema);

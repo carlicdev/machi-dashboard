@@ -12,7 +12,7 @@ const OrdersMain = () => {
                 </div>
                 <OrderList />
             </div>
-            <div className='col-lg-3'>
+            <div className='col-lg-3 pt-5'>
                 <OrderForm />
             </div>
         </div>

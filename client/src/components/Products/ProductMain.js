@@ -11,7 +11,7 @@ const ProductMain = () => {
                 </div>
                 <ProductList />
             </div>
-            <div className='col-lg-3'>
+            <div className='col-lg-3 pt-5'>
                 <ProductForm />
             </div>
         </div>

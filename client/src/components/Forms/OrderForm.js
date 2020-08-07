@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const OrderForm = () => {
     const [count, setCount] = useState(1);
     const [name, setName] = useState('');
@@ -60,7 +61,7 @@ const OrderForm = () => {
             <div className='card'>
                 <div className='card-header text-center bg-dark text-light '>
                     <p className='card-title'>
-                        Agregar orden
+                        Agregar pedido
                     </p>
                 </div>
                 <div className='card-body'>
@@ -218,7 +219,7 @@ const OrderForm = () => {
                             <button type='button' className='btn btn-danger mt-2'
                                 onClick={(e) => setCount(count - 1)}
                             >
-                                +
+                                -
                             </button>
 
                             <div className='text-center mx-auto mt-2'>

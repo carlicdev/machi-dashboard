@@ -4,18 +4,6 @@ const Order = require('../models/order');
 const Product = require('../models/product');
 const Client = require('../models/client');
 
-function getTotal(order) {
-    if (order.length < 1) {
-        let tempTotal = 0;
-        order.forEach(i => {
-            tempTotal = tempTotal + i.price
-        });
-        return tempTotal;
-    } else {
-        return null;
-    }
-}
-
 exports.get_all_orders = async (req, res) => {
     await Order.find().populate('client', 'name _id').populate('order', 'name price')
         .then(result => {
@@ -42,7 +30,6 @@ exports.new_order = async (req, res) => {
         client: myClient,
         deliveryDay: new Date(year,month-1,day),
         order: order,
-        total: 100
     });
     newOrder.save()
         .then(result => {
