@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import SelectOrder from './SelectOrder';
+import { MachiContext } from '../../context/context';
 
 
 const OrderForm = () => {
+    const { clients } = useContext(MachiContext);
     const [count, setCount] = useState(1);
     const [name, setName] = useState('');
     const [year, setYear] = useState('');
@@ -68,10 +71,19 @@ const OrderForm = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='form-group'>
                             <label htmlFor='name'>Nombre del cliente</label>
-                            <input type='text' className='form-control' name='name'
+                            <select  className='form-control' name='name'
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                ></input>
+                                >
+                                    <option value={null}>-</option>
+                                    {
+                                        clients.map(client => {
+                                           return  <option key={client._id} value={client.name}>
+                                                {client.name}
+                                            </option>
+                                        })
+                                    }
+                                </select>
                         </div>
                         <div className='row'>
                             <div className='col-4'>
@@ -154,55 +166,50 @@ const OrderForm = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='form-group'>
-                            <label htmlFor='order1'>Orden1</label>
-                            <input type='text' className='form-control' name='order1'
-                                value={order1}
-                                onChange={(e) => setOrder1(e.target.value)}
-                                ></input>
-                        </div>
+                        <SelectOrder
+                            name='order1'
+                            value={order1}
+                            title='Producto'
+                            onChange={setOrder1}
+                            />
                         {
                             count >= 2 && (
-                        <div className='form-group'>
-                            <label htmlFor='order2'>Orden2</label>
-                            <input type='text' className='form-control' name='order2'
-                                value={order2}
-                                onChange={(e) => setOrder2(e.target.value)}
-                                ></input>
-                        </div>
+                        <SelectOrder 
+                            name='order2' 
+                            value={order2}
+                            title='Producto 2' 
+                            onChange={setOrder2}
+                            />
                             )
                         }
                         {
                             count >= 3 && (
-                        <div className='form-group'>
-                            <label htmlFor='order3'>Orden3</label>
-                            <input type='text' className='form-control' name='order3'
-                                value={order3}
-                                onChange={(e) => setOrder3(e.target.value)}
-                                ></input>
-                        </div>
+                        <SelectOrder
+                            name='order3'
+                            value={order3}
+                            title='Producto 3'
+                            onChange={setOrder3}
+                            />
                             )
                         }
                         {
                             count >= 4 && (
-                        <div className='form-group'>
-                            <label htmlFor='order4'>Orden4</label>
-                            <input type='text' className='form-control' name='order4'
+                                <SelectOrder
+                                name='order4'
                                 value={order4}
-                                onChange={(e) => setOrder4(e.target.value)}
-                                ></input>
-                        </div>
+                                title='Producto 4'
+                                onChange={setOrder4}
+                                />
                             )
                         }
                         {
                             count >= 5 && (
-                        <div className='form-group'>
-                            <label htmlFor='order5'>Orden5</label>
-                            <input type='text' className='form-control' name='order5'
+                                <SelectOrder
+                                name='order5'
                                 value={order5}
-                                onChange={(e) => setOrder5(e.target.value)}
-                                ></input>
-                        </div>
+                                title='Producto 5'
+                                onChange={setOrder5}
+                                />
                             )
                         }
                         {
@@ -217,7 +224,7 @@ const OrderForm = () => {
                         }
                         <div className='d-flex'>
                             <button type='button' className='btn btn-danger mt-2'
-                                onClick={(e) => setCount(count - 1)}
+                                onClick={(e) => setCount(count > 1 ? count - 1 : count)}
                             >
                                 -
                             </button>
@@ -228,7 +235,7 @@ const OrderForm = () => {
                                     </button>
                             </div>
                             <button type='button' className='btn btn-success mt-2'
-                                onClick={(e) => setCount(count + 1)}
+                                onClick={(e) => setCount(count < 5 ? count + 1: count)}
                             >
                                 +
                             </button>

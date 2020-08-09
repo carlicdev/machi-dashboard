@@ -43,6 +43,11 @@ console.log(orders);
         axios.delete(`/api/clients/delete-client/${id}`);
     };
 
+    const deleteOrder = (e, id) => {
+        e.preventDefault();
+        axios.delete(`/api/orders/delete-order/${id}`)
+    }
+
     return (
         <MachiContext.Provider value={{
             products,
@@ -50,6 +55,7 @@ console.log(orders);
             orders,
             deleteProduct,
             deleteClient,
+            deleteOrder,
         }}>
             {props.children}
         </MachiContext.Provider>
