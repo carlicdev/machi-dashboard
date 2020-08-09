@@ -13,4 +13,6 @@ router.delete('/delete-order/:id', orderCtrl.delete_order);
 
 router.patch('/update/:id', orderCtrl.update_order);
 
+router.patch('/update-status/:id', orderCtrl.update_status);
+
 module.exports = router;

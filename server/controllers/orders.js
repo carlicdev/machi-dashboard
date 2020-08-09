@@ -7,7 +7,6 @@ const Client = require('../models/client');
 exports.get_all_orders = async (req, res) => {
     await Order.find().populate('client', 'name _id').populate('order', 'name price')
         .then(result => {
-            console.log(result);
             res.status(200).json(result);
         })
         .catch(err => res.status(500).json({errMsg: err}));
@@ -73,3 +72,13 @@ exports.update_order = (req, res) => {
     })
     .catch(err => res.status(500).json({errMsg: err}))
 };
+
+exports.update_status = (req, res) => {
+    const { status } = req.body;
+    Order.findByIdAndUpdate({_id: req.params.id}, {$set: {status: status}})
+        .then(() => {
+            res.status(201).json({
+                msg: 'status actualizado'
+            })
+        }).catch(err => res.status(500).json({errMsg: err}));
+}

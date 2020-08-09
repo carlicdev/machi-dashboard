@@ -14,7 +14,7 @@ const handleTotal = (ord) => {
 
 
 const Order = ({order}) => {
-    const { deleteOrder } = useContext(MachiContext);
+    const { deleteOrder, updateStatus } = useContext(MachiContext);
     const { deliveryDay, _id} = order;
     const bg = order.status === 'pending' ? 'bg-danger' : 'bg-success';
     return (
@@ -35,11 +35,23 @@ const Order = ({order}) => {
                     return <p key={order.order.indexOf(i)}>{i.name}</p>
                     })
                 }
-                <button className='btn btn-danger'
-                    onClick={(e) => deleteOrder(e,_id )}
-                    >
-                        Eliminar
-                    </button>
+                {
+                    order.status === 'pending' && (
+
+                        <div className='d-flex justify-content-center'>
+                            <button className='btn btn-success mx-auto'
+                                onClick={(e) => updateStatus(e,_id )}
+                                >
+                                    Entregado
+                            </button>
+                            <button className='btn btn-danger mx-auto'
+                                onClick={(e) => deleteOrder(e,_id )}
+                                >
+                                    Eliminar
+                            </button>
+                        </div>
+                    )
+                }
             </div>
             <div className='card-footer'>
                 <p className='card-text'>Total: ${handleTotal(order.order)}</p>

@@ -8,6 +8,7 @@ const app = express();
 const productRouter = require('./server/routes/products');
 const orderRouter = require('./server/routes/orders');
 const clientRouter = require('./server/routes/clients');
+const salesRouter = require('./server/routes/sales');
 
 // Database
 require('./server/db/db');
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/clients', clientRouter);
+app.use('/api/sales', salesRouter);
 
 // Starting server
 app.listen(app.get('PORT'), () => {

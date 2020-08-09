@@ -7,7 +7,8 @@ const MachiContextProvider = (props) => {
     const [products, setProducts] = useState([]);
     const [clients, setClients] = useState([]);
     const [orders, setOrders] = useState([]);
-console.log(orders);
+    const [salesByProduct, setSalesByProduct] = useState([]);
+    
     useEffect(() => {
         const getProducts = async () => {
             let products = await axios.get('/api/products');
@@ -32,6 +33,15 @@ console.log(orders);
         getOrders();
     }, []);
 
+    useEffect(() => {
+        const getSalesByProduct = async () => {
+            let sales = await axios.get('/api/sales/by-product');
+            console.log(sales.data)
+            setSalesByProduct(sales.data);
+        };
+        getSalesByProduct();
+    }, []);
+
 
     const deleteProduct = (e, id) => {
         e.preventDefault();
@@ -45,7 +55,11 @@ console.log(orders);
 
     const deleteOrder = (e, id) => {
         e.preventDefault();
-        axios.delete(`/api/orders/delete-order/${id}`)
+        axios.delete(`/api/orders/delete-order/${id}`);
+    }
+    const updateStatus = (e, id) => {
+        e.preventDefault();
+        axios.patch(`/api/orders/update-status/${id}`, {status: 'entregada'});
     }
 
     return (
@@ -53,9 +67,11 @@ console.log(orders);
             products,
             clients,
             orders,
+            salesByProduct,
             deleteProduct,
             deleteClient,
             deleteOrder,
+            updateStatus,
         }}>
             {props.children}
         </MachiContext.Provider>

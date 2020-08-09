@@ -11,12 +11,19 @@ const OrderList = () => {
     });
     console.log(sortedOrders);
     return (
-        <div className='d-flex flex-wrap p-5'>
-            {
-                sortedOrders.map(order => {
-                    return <Order key={order._id} order={order} />
-                })
-            }
+        <div className='card text-center p-0 my-5'>
+            <div className='card-header bg-dark text-light'>
+                <h1>Lista de pedidos</h1>
+            </div>
+            <div className='card-body'>
+                <div className='d-flex flex-wrap p-5'>
+                    {
+                        sortedOrders.map(order => {
+                            return <Order key={order._id} order={order} />
+                        })
+                    }
+                </div>
+            </div>
         </div>
     )
 }
